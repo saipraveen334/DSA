@@ -4,17 +4,20 @@ class Solution:
         r , right = len(nums) - 1 , len(nums) - 1
         res = [0] * len(nums)
 
-        for l in range(len(nums)):
+        while l < len(nums):
             if nums[l] < pivot:
                 res[left] = nums[l]
                 left += 1
-        for r in range(len(nums) - 1 , -1 ,-1):
             if nums[r] > pivot:
                 res[right] = nums[r]
                 right -= 1
-        for k in range(left , right + 1):
-            res[k] = pivot
-        return res
+            l += 1
+            r -= 1
+        while left <= right:
+            res[left] = pivot
+            left += 1
+
+        return res 
 
 
         
