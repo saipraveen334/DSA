@@ -1,17 +1,29 @@
-import java.util.*;
-
-class Solution {
+public class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        Map<Integer, Integer> hashmap = new HashMap<>();
-        List<Integer> res = new ArrayList<>();
+        Map<Integer, Integer> count = new HashMap<>();
 
-        for (int n : nums) {
-            hashmap.put(n, hashmap.getOrDefault(n, 0) + 1);
+        for (int num : nums) {
+            count.put(num, count.getOrDefault(num, 0) + 1);
+
+            if (count.size() > 2) {
+                Map<Integer, Integer> newCount = new HashMap<>();
+                for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+                    if (entry.getValue() > 1) {
+                        newCount.put(entry.getKey(), entry.getValue() - 1);
+                    }
+                }
+                count = newCount;
+            }
         }
 
-        for (Map.Entry<Integer, Integer> entry : hashmap.entrySet()) {
-            if (entry.getValue() > nums.length / 3) {
-                res.add(entry.getKey());
+        List<Integer> res = new ArrayList<>();
+        for (int key : count.keySet()) {
+            int frequency = 0;
+            for (int num : nums) {
+                if (num == key) frequency++;
+            }
+            if (frequency > nums.length / 3) {
+                res.add(key);
             }
         }
 
