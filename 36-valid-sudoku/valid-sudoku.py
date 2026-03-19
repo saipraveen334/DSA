@@ -1,19 +1,45 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        rows = collections.defaultdict(set)
-        cols = collections.defaultdict(set)
-        square = collections.defaultdict(set)
 
-        square = collections.defaultdict(set)
 
         for r in range(9):
+            seen = set()
             for c in range(9):
-
                 if board[r][c] == ".":
                     continue
-                if board[r][c] in rows[r] or board[r][c] in cols[c] or board[r][c] in square[(r // 3 , c // 3)]:
+                if board[r][c] in seen:
                     return False
-                rows[r].add(board[r][c])
-                cols[c].add(board[r][c])
-                square[(r // 3 , c // 3)].add(board[r][c])
-        return True                                                 
+                seen.add(board[r][c])
+        
+        for c in range(9):
+            seen = set()
+            for r in range(9):
+                if board[r][c] == ".":
+                    continue 
+                if board[r][c] in seen:
+                    return False
+                seen.add(board[r][c])
+        
+        for grid in range(9):
+            seen = set()
+
+            for i in range(3):
+                for j in range(3):
+
+                    r = (grid // 3) * 3 + i
+                    c = (grid % 3) * 3 + j
+
+                    if board[r][c] == ".":
+                        continue
+    
+                    if board[r][c] in seen:
+                        return False
+
+                    seen.add(board[r][c])
+        return True
+                    
+
+
+
+
+        
