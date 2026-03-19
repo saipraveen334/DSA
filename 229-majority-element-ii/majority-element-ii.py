@@ -1,16 +1,27 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> List[int]:
-        
-        hashmap = {}
-        res = []
+        count = defaultdict(int)
+
         for n in nums:
-            hashmap[n] = hashmap.get(n , 0) + 1
 
-        for key,value in hashmap.items():
+            count[n] += 1
 
-            if value > len(nums) // 3:
-                res.append(key)
-        return res 
-            
+            if len(count) <= 2:
+                continue
+
+            new_count = defaultdict(int)
+
+            for n , val in count.items():
+
+                if val > 1:
+                    new_count[n] = val - 1
+            count = new_count
+        res = []
+
+        for num in count:
+            if nums.count(num) > len(nums) //3:
+                res.append(num)
+        return res
+
 
         
