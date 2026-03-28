@@ -13,7 +13,7 @@ class Solution:
                 elif nums[val - 1] > 0:
                     nums[val - 1] *= -1 
                 else:
-                    nums[val - 1] = -1 * (len(nums) + 1)
+                    nums[val - 1] = -11 * (len(nums) + 1)
 
         for i in range(1 , len(nums) + 1):
             if nums[i - 1] >= 0:
