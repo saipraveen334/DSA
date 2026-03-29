@@ -1,45 +1,46 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        int threesum = 0;
+        // using pointers
         Arrays.sort(nums);
 
-        for (int i = 0 ; i < nums.length - 2 ; i++)
+        List<List<Integer>> res = new ArrayList<>();
+
+        for(int i = 0 ; i < nums.length ; i++)
         {
-            if (i > 0 && nums[i-1] == nums[i])
+            if(nums[i] > 0)
+            {
+                break;
+            }
+            if(i > 0 && nums[i] == nums[i-1])
             {
                 continue;
             }
-            int left = i + 1;
-            int right = nums.length - 1;
+            int l = i + 1;
+            int r = nums.length - 1;
+            int cursum = 0;
 
-            while (left < right)
+            while(l < r)
             {
-                threesum = nums[i] + nums[left] + nums[right];
+                cursum = nums[i] + nums[l] + nums[r];
 
-                if (threesum < 0)
+                if(cursum > 0)
                 {
-                    left ++ ;
+                    r -= 1;
                 }
-                else if (threesum > 0)
+                else if(cursum < 0)
                 {
-                    right --;
+                    l += 1;
                 }
                 else
                 {
-                    res.add(Arrays.asList(nums[i] , nums[left] , nums[right]));
+                    res.add(Arrays.asList(nums[i] , nums[l] , nums[r]));
+                    l += 1;
+                    r -= 1;
 
-                    // REMOVING DULICATES
-                    while (left < right && nums[left] == nums[left + 1]){
-                        left ++ ;
+                    while(nums[l] == nums[l-1] && l < r)
+                    {
+                        l += 1;
                     }
-                    while (left < right && nums[right] == nums[right - 1]){
-                        right -- ;
-                    }
-                    left ++ ;
-                    right --;
-
-
                 }
             }
         }
