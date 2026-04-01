@@ -9,10 +9,13 @@ class Solution:
             if r - l > k:
                 window.remove(nums[l])
                 l += 1
+
             if nums[r] in window:
                 return True
+
             window.add(nums[r]) 
             r += 1
+            
         return False
 
 
