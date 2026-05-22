@@ -1,5 +1,7 @@
 class FreqStack:
 
+    #INSANE SOLUTION 
+    
     def __init__(self):
         self.cnt = {}
         self.maxCnt = 0
