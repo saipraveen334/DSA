@@ -8,7 +8,7 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         #INORDER TRAVERSAL ITERATIVE METHOD
 
-        res = []
+     
         stack = []
         cur = root 
 
