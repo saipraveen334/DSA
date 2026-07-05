@@ -18,11 +18,13 @@ class Solution:
                 cur = cur.left
             
             cur = stack.pop()
-            res.append(cur.val)
-            cur = cur.right
-        return res[k-1]
-            
+            k -= 1
+            if k == 0:
+                return cur.val
 
+            cur = cur.right
+        
+            
 
 
         #INORDER TRAVERSAL 
