@@ -1,26 +1,23 @@
 class Solution:
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
-        trips.sort(key = lambda t:t[1])
-        minheap = []
-        curpas = 0
+        trips.sort(key = lambda   t : t[1])
+        minHeap  = []  # ( END , NUMPASSENGERS )
 
-        for t in trips:
-            pas , st , end = t
+        curPass = 0
 
-            while minheap and minheap[0][0] <= st:
+        for numPass , start , end  in trips:
+            while minHeap and minHeap[0][0] <= start:
+                end1 , numPass1 = heapq.heappop(minHeap)
+                curPass -= numPass1
+            
+            curPass += numPass 
 
-                curpas -= minheap[0][1]
-                heapq.heappop(minheap)
+            if curPass > capacity:
+                return False 
+            
+            heapq.heappush(minHeap ,(end , numPass))
 
-            curpas += pas
-                
-
-            if curpas > capacity:
-                return False
-
-            heapq.heappush(minheap , [end , pas])
         return True 
-
 
 
         
