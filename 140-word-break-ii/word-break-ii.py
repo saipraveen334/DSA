@@ -1,6 +1,5 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-
         # Backtracking with memoization
         res = []
         cache = {}
@@ -16,9 +15,8 @@ class Solution:
             res = []
 
             for j in range( i , len(s)):
-
                 w = s[i : j + 1]
-
+                
                 if w not in wordDict:
                     continue 
 
@@ -26,10 +24,10 @@ class Solution:
 
                 for subs in strings:
                     sentence = w
-
                     if subs:
                         sentence += " " + subs
                     res.append(sentence)
+
             cache[i] = res 
             return res
         return backtrack(0)    
