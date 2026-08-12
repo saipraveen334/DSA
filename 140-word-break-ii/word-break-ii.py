@@ -1,6 +1,40 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        #Backtarcking algo 
+
+        # Backtracking with memoization
+        res = []
+        cache = {}
+
+        def backtrack(i):
+            if i == len(s):
+                return [""]
+            
+            if i in cache:
+                return cache[i]
+
+
+            res = []
+
+            for j in range( i , len(s)):
+
+                w = s[i : j + 1]
+
+                if w not in wordDict:
+                    continue 
+
+                strings = backtrack(j + 1)
+
+                for subs in strings:
+                    sentence = w
+
+                    if subs:
+                        sentence += " " + subs
+                    res.append(sentence)
+            cache[i] = res 
+            return res
+        return backtrack(0)    
+
+        # Backtracking algo 
 
         cur = []
         res = []
