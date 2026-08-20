@@ -14,11 +14,6 @@ class Solution:
             dfs(r , c + 1)
             dfs(r , c - 1)
 
-
-
-            
-            
-
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if grid[r][c] == "1" and (r,c) not in visit:
