@@ -1,7 +1,7 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        # COUNT THE FRESH ORANGES
-        # BFS 
+        # count the fresh oranges 
+        # bfs
         
         q = collections.deque()
         fresh = 0 
