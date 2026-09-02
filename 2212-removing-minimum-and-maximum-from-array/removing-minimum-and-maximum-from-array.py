@@ -1,47 +1,34 @@
 class Solution:
     def minimumDeletions(self, nums: List[int]) -> int:
-        # base cases
+
+        # edge case 
         if len(nums) == 1:
             return 1
+        
+        # get the index of the maximum number 
 
-        # get the indexes of maximum and minimum respectively
-        l = 0
-        r = len(nums) - 1
+        maxpoint = 0 
 
-        while l <= r:
-            if nums[l] < nums[r]:
-                l += 1
-            elif nums[r] < nums[l]:
-                r -= 1
-            else:
-                break
+        for i in range(len(nums)):
+            if nums[i] > nums[maxpoint]:
+                maxpoint = i 
+        
+        # get the index of the minimum number 
 
-        maxpoint = l
+        minpoint = 0 
 
-        # get min point
-        l = 0
-        r = len(nums) - 1
-
-        while l <= r:
-            if nums[l] > nums[r]:
-                l += 1
-            elif nums[r] > nums[l]:
-                r -= 1
-            else:
-                break
-
-        minpoint = l
-
-        # get the indexes
+        for i in range(len(nums)):
+            if nums[i] < nums[minpoint]:
+                minpoint = i
+            
         if maxpoint < minpoint:
-            return min(
-                maxpoint + 1 + len(nums) - minpoint,
-                minpoint + 1,
-                len(nums) - maxpoint
-            )
+
+            return min(len(nums[:minpoint + 1]) ,
+                       len(nums[:maxpoint + 1] + nums[minpoint:]) ,
+                       len(nums[maxpoint:]))
         else:
-            return min(
-                minpoint + 1 + len(nums) - maxpoint,
-                maxpoint + 1,
-                len(nums) - minpoint
-            )
+
+            return min(len(nums[: maxpoint + 1]),
+                       len(nums[:minpoint + 1] + nums[maxpoint:]),
+                       len(nums[minpoint:]))
+        
