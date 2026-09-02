@@ -22,13 +22,15 @@ class Solution:
                 minpoint = i
             
         if maxpoint < minpoint:
+            return min(
+                        minpoint + 1,
+                        maxpoint + 1 + len(nums) - minpoint,
+                        len(nums) - maxpoint
+                      )
 
-            return min(len(nums[:minpoint + 1]) ,
-                       len(nums[:maxpoint + 1] + nums[minpoint:]) ,
-                       len(nums[maxpoint:]))
         else:
-
-            return min(len(nums[: maxpoint + 1]),
-                       len(nums[:minpoint + 1] + nums[maxpoint:]),
-                       len(nums[minpoint:]))
-        
+            return min(
+                        maxpoint + 1,
+                        minpoint + 1 + len(nums) - maxpoint,
+                        len(nums) - minpoint
+                      )
