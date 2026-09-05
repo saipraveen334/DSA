@@ -1,7 +1,53 @@
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        # union find
+        # peak dfs appraoch also
+        # checking if we can reach the edge before adding it 
 
+        adj = [[] for _ in range(len(edges) + 1)]
+
+        def dfs(node , target , visit):
+
+            # reached base case 
+
+            if node == target:
+                return True 
+            
+            visit[node] = True 
+
+            for nei in adj[node]:
+                if not visit[nei]:
+                    if dfs( nei , target , visit):
+                        return True 
+            
+            return False 
+                    
+
+
+
+        for n1 , n2 in edges:
+
+            visit = [False] * (len(edges) + 1)
+
+            if dfs(n1 , n2 , visit):
+                return [n1 , n2]
+
+            # we cant reach the edge so add it 
+
+            adj[n1].append(n2)
+            adj[n2].append(n1)
+        
+        return [] # no cycle 
+
+            
+
+
+
+
+
+
+
+
+        # union find
         N = len(edges)
 
         par = [i for i in range(N + 1)]
