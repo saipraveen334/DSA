@@ -1,5 +1,10 @@
 class Solution:
     def countCommas(self, n: int) -> int:
+
+        # 1 line code 
+
+        return max(n - 999 , 0)
+        
         # optimal sol
 
         res = 0
@@ -10,34 +15,6 @@ class Solution:
             power *= 1000
 
         return res
-
-        
-        # optimal solution 
-
-        if n < 1000:
-            return 0 
-        
-        res = 0 
-        start = 1000 
-        comas = 1 
-
-        while start <= n:
-            end = min(n , start * 1000 - 1)
-
-            res = (end - start + 1) * comas 
-
-            start *= 1000 
-
-            comas += 1
-        return res
-
-        
-
-
-
-
-
-
 
 
         # brute force 
