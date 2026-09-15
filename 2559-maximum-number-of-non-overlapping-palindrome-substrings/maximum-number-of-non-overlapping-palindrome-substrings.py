@@ -1,27 +1,41 @@
 class Solution:
     def maxPalindromes(self, s: str, k: int) -> int:
-
         n = len(s)
+        ans = 0
+        i = 0
 
-        pal = [[False] * n for _ in range(n)]
+        while i < n:
+            found = False
 
-        for length in range(1, n + 1):
-            for left in range(n - length + 1):
-                right = left + length - 1
+            # Check palindrome of length k
+            if i + k <= n:
+                left = i
+                right = i + k - 1
 
-                if s[left] == s[right]:
-                    if length <= 2 or pal[left + 1][right - 1]:
-                        pal[left][right] = True
+                while left < right and s[left] == s[right]:
+                    left += 1
+                    right -= 1
 
-        dp = [0] * (n + 1)
+                if left >= right:
+                    ans += 1
+                    i += k
+                    found = True
 
-        for i in range(1, n + 1):
+            # Check palindrome of length k + 1
+            if not found and i + k + 1 <= n:
+                left = i
+                right = i + k
 
-            # Skip s[i - 1]
-            dp[i] = dp[i - 1]
+                while left < right and s[left] == s[right]:
+                    left += 1
+                    right -= 1
 
-            for j in range(i - k + 1):
-                if pal[j][i - 1]:
-                    dp[i] = max(dp[i], dp[j] + 1)
+                if left >= right:
+                    ans += 1
+                    i += k + 1
+                    found = True
 
-        return dp[n]
+            if not found:
+                i += 1
+
+        return ans
