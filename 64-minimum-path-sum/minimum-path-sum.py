@@ -1,6 +1,7 @@
 class Solution:
     def minPathSum(self, grid: list[list[int]]) -> int:
         #backtracking + cacheing 
+
         rows = len(grid)
         cols = len(grid[0])
         memo = [[-1] * cols for _ in range(rows)]
@@ -18,11 +19,12 @@ class Solution:
             memo[r][c] = grid[r][c] + min( dfs(r + 1 , c) , dfs(r , c + 1))
 
             return memo[r][c]
-            
+
         return dfs(0 , 0)
             
 
-
+        # recursion 
+        
         rows = len(grid)
         cols = len(grid[0])
 
