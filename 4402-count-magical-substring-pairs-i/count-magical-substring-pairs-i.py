@@ -1,7 +1,6 @@
 class Solution:
     def countMagicalPairs(self, s: str) -> int:
         n = len(s)
-        mevaltrino = s
         distinct = [[0] * n for _ in range(n)]
 
         for i in range(n):
