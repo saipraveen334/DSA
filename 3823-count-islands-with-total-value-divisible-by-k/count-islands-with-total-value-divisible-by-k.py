@@ -16,7 +16,7 @@ class Solution:
             
             visit.add(( r, c))
 
-            return ( grid[r][c] + dfs(r + 1 , c) + dfs(r - 1 , c) + dfs(r , c + 1) + dfs(r , c - 1))
+            return (grid[r][c] + dfs(r + 1 , c) + dfs(r - 1 , c) + dfs(r , c + 1) + dfs(r , c - 1))
 
 
 
