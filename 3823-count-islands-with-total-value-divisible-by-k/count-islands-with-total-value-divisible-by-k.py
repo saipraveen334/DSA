@@ -1,5 +1,44 @@
 class Solution:
     def countIslands(self, grid: List[List[int]], k: int) -> int:
+        # bfs solution 
+        rows = len(grid)
+        cols = len(grid[0])
+        directions =[[0 , 1] , [1 , 0] , [-1 , 0] , [0 , -1]]
+        visit = set()
+        countRes = 0
+
+        def bfs(r , c):
+            q = collections.deque()
+            q.append([r, c])
+            visit.add((r , c))
+            total = 0
+
+            while q:
+                r , c = q.popleft()
+                total += grid[r][c]
+
+                for dr , dc in directions:
+                    nr = dr + r
+                    nc = dc + c
+
+                    # out of bounds or invalid
+                    if nr < 0 or nc < 0 or nr >= rows or nc >= cols or grid[nr][nc] == 0 or (nr , nc) in visit:
+                        continue
+                    
+                    q.append([nr , nc])
+                    visit.add((nr , nc))
+
+            return total
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] != 0 and (r , c) not in visit:
+                    res = bfs(r , c)
+
+                    if res % k == 0:
+                        countRes += 1
+        return countRes 
+
         # dfs solution
         visit = set()
         rows = len(grid)
