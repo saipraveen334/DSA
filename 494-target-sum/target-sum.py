@@ -1,7 +1,6 @@
 class Solution:
     def findTargetSumWays(self, nums: list[int], target: int) -> int:
         # backtracking + caching
-
         memo = {}
 
         def dfs(i , total):
@@ -16,9 +15,6 @@ class Solution:
             return memo[(i , total)]
 
         return dfs(0 , 0)
-
-
-
 
 
         # backtracking 
