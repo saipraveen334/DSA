@@ -6,10 +6,7 @@ class Solution:
 
         def dfs(i , total):
             if i == len(nums):
-                if total == target:
-                    return 1
-                else:
-                    return 0 
+                return 1 if total == target else 0
             
             if (i , total) in memo:
                 return memo[(i , total)]
@@ -17,7 +14,7 @@ class Solution:
             memo[(i , total)] = dfs(i + 1 , total - nums[i]) + dfs (i + 1, total + nums[i])
 
             return memo[(i , total)]
-            
+
         return dfs(0 , 0)
 
 
