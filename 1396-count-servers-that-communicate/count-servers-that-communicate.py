@@ -1,5 +1,50 @@
 class Solution:
     def countServers(self, grid: list[list[int]]) -> int:
+        # bfs approach 
+        visit = set()
+        res = 0
+        rows = len(grid)
+        cols = len(grid[0])
+
+        def bfs(r , c):
+            nonlocal res
+            q = collections.deque()
+            q.append((r, c))
+            visit.add((r , c))
+            count = 1 
+
+            while q:
+                r , c = q.popleft()
+                
+
+                for nc in range(cols):
+                    if grid[r][nc] == 1 and (r , nc) not in visit:
+                        q.append((r , nc))
+                        visit.add((r , nc))
+                        count += 1
+                
+                for nr in range(rows):
+                    if grid[nr][c] == 1  and (nr , c) not in visit:
+                        q.append((nr , c))
+                        visit.add((nr , c))
+                        count += 1
+            if count != 1:
+                res += count 
+        
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == 1 and (r ,c) not in visit:
+                    bfs(r , c)
+        
+        return res 
+        
+
+                
+
+                    
+
+
+
         # row column count approach 
         rowCnt = [0] * len(grid)
         colCnt = [0] * len(grid[0])
