@@ -1,5 +1,27 @@
 class Solution:
     def countServers(self, grid: list[list[int]]) -> int:
+        # row column count approach 
+        rowCnt = [0] * len(grid)
+        colCnt = [0] * len(grid[0])
+        rows = len(grid)
+        cols = len(grid[0])
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == 1:
+                    rowCnt[r] += 1
+                    colCnt[c] += 1
+            
+        ans = 0 
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == 1:
+                    if rowCnt[r] > 1 or colCnt[c] > 1:
+                        ans += 1
+        return ans
+
+        # dfs solution 
         ans = 0
         visit = set()
         rows = len(grid)
