@@ -37,12 +37,6 @@ class Solution:
                     bfs(r , c)
         
         return res 
-        
-
-                
-
-                    
-
 
 
         # row column count approach 
