@@ -1,5 +1,31 @@
 class Solution:
     def climbStairs(self, n: int, costs: List[int]) -> int:
+        # dijstra (minheap)
+        dist = [float("inf")] * (n + 1)
+        minheap = [(0 , 0)]
+        heapq.heapify(minheap)
+
+        while minheap:
+            idx , cst = heapq.heappop(minheap)
+
+            # skip case 
+            if cst > dist[idx]:
+                continue
+
+            # edge case 
+            if idx == n:
+                return cst 
+
+            for j in range(idx + 1 , min(n , idx + 3) + 1):
+                new_cost = cst + costs[j - 1] + (j - idx) ** 2
+
+                if new_cost < dist[j]:
+                    dist[j] = new_cost 
+                    heapq.heappush(minheap ,(j , new_cost))
+
+        return dist[n]
+
+
         # backtracking + memoization 
         dp = {}
         
@@ -19,8 +45,6 @@ class Solution:
             return dp[i]
 
         return dfs(0)
-
-
 
 
         # brute force
