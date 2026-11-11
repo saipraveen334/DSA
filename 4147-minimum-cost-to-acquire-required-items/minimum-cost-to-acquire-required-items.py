@@ -7,7 +7,6 @@ class Solution:
             ans += (need1 - both) * min(cost1 , costBoth)
         else:
             ans += (need2 - both) * min(cost2 , costBoth)
-        
         return ans
 
         
