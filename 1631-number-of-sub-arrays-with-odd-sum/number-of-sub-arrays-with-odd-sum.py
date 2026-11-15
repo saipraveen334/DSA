@@ -8,7 +8,6 @@ class Solution:
 
         for n in arr:
             curSum += n 
-
             if curSum % 2 == 0:
                 res = (res + oddCnt) % MOD
                 evnCnt += 1
