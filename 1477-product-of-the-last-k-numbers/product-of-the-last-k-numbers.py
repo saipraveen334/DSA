@@ -1,37 +1,15 @@
 class ProductOfNumbers:
-
+    
     def __init__(self):
-        self.products = []
-        self.product = 1
-
-        
+        self.prefix = [1]  
 
     def add(self, num: int) -> None:
-
-        if num:
-            self.product *= num
-            self.products.append(self.product)
-            
+        if num == 0:
+            self.prefix = [1]  
         else:
-            self.product = 1
-            self.products = []
-        
+            self.prefix.append(self.prefix[-1] * num)
 
     def getProduct(self, k: int) -> int:
-
-        if len(self.products) < k:
+        if k >= len(self.prefix): 
             return 0
-
-        elif k == len(self.products):
-            return self.product
-
-        else:
-            return (self.products[-1] // self.products[-k-1]  )
-
-        
-
-
-# Your ProductOfNumbers object will be instantiated and called as such:
-# obj = ProductOfNumbers()
-# obj.add(num)
-# param_2 = obj.getProduct(k)
+        return self.prefix[-1] // self.prefix[-1 - k]
