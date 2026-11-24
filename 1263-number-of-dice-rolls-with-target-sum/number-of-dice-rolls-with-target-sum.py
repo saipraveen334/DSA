@@ -20,11 +20,10 @@ class Solution:
             for num in range(1 , k + 1):
                 res += dfs(i + 1 , curSum + num) 
                 
-            
             memo[(i , curSum)] = res
             return res % mod
 
-        return dfs(0 , 0) % mod
+        return dfs(0 , 0) 
             
             
         
